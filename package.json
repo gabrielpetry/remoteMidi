@@ -23,5 +23,14 @@
     "easymidi": "^2.0.1",
     "express": "^4.17.1",
     "socket.io": "^2.3.0"
+  },
+  "devDependencies": {
+    "@types/node": "^14.11.2",
+    "electron": "^10.1.2",
+    "electron-builder": "^22.8.1",
+    "electron-rebuild": "^2.0.3",
+    "nodemon": "^2.0.4",
+    "sucrase": "^3.15.0",
+    "typescript": "^4.0.3"
   }
 }
