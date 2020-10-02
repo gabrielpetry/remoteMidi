@@ -40,6 +40,26 @@ export async function startSerialMonitor(rxDb) {
       })
       return
     }
+
+    if (message.subject.includes('SwitchButton')) {
+      console.log('Serial message', message)
+      const note = message.subject.split('SwitchButton').pop()
+      const velocity = 127
+      const onOrOff = parseInt(message.body) ? 'on' : 'off'
+
+      await rxDb.items.atomicUpsert({
+        key: 'switchButton',
+        value: {
+          button: message.subject,
+          note,
+          velocity,
+          onOrOff,
+        },
+      })
+
+      return
+    }
+
     console.log('Unhandled serial message', message)
   })
 }

@@ -24,6 +24,17 @@ const sendPushButtonClick = async (doc) => {
   midiOutput.send('noteoff', noteAttributes)
 }
 
+const sendSwitchMode = async (doc) => {
+  console.log('SwitchButton', doc.key, doc.value)
+  let { note, velocity, onOrOff } = doc.value
+  let noteAttributes = {
+    note: note,
+    velocity: velocity,
+    channel: 0,
+  }
+  midiOutput.send(`note${onOrOff}`, noteAttributes)
+}
+
 const initKeyObserverCallback = async (rxDb, keyValue: string, handlerFunction: CallableFunction) => {
   rxDb.items
     .findOne()
@@ -38,4 +49,5 @@ const initKeyObserverCallback = async (rxDb, keyValue: string, handlerFunction: 
 export function startObservers(rxDb) {
   initKeyObserverCallback(rxDb, 'faderChanged', sendFaderCc)
   initKeyObserverCallback(rxDb, 'pushButton', sendPushButtonClick)
+  initKeyObserverCallback(rxDb, 'switchButton', sendSwitchMode)
 }
