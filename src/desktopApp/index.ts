@@ -60,8 +60,12 @@ app.on('ready', async () => {
   })
 
   // ensure a hook to erase the tray
-  app.on('before-quit', function (evt) {
+  app.on('window-all-closed', app.quit)
+  app.on('before-quit', () => {
+    console.log('Exiting')
     trayIcon.destroy()
+    mainWindow.close()
+    app.exit()
   })
 })
 // }
